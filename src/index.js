@@ -13,23 +13,20 @@ inputEl.addEventListener('input', debounce(onInputCountry, DEBOUNCE_DELAY));
 
 function onInputCountry(evt) {
   const country = evt.target.value;
-
-  // fetch(
-  //   `${BASE_URL}name/${country}?fields=name,capital,population,flags,languages`
-  // )
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       throw new Error();
-  //     }
-  //     return response.json();
-  //   })
+  countryList.innerHTML = '';
+  countryInfo.innerHTML = '';
+  if (!country) {
+    inputEl.removeEventListener(
+      'input',
+      debounce(onInputCountry, DEBOUNCE_DELAY)
+    );
+    return;
+  }
   fetchCountries(country)
     .then(data => {
       if (data.length === 1) {
-        countryList.innerHTML = '';
         countryInfo.innerHTML = creatMarckup(data);
       } else if (data.length > 1 && data.length <= 10) {
-        countryInfo.innerHTML = '';
         countryList.innerHTML = creatCountryList(data);
       } else {
         Notify.info(
