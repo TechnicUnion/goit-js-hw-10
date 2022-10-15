@@ -12,9 +12,11 @@ const inputEl = document.querySelector('#search-box');
 inputEl.addEventListener('input', debounce(onInputCountry, DEBOUNCE_DELAY));
 
 function onInputCountry(evt) {
-  const country = evt.target.value;
+  const country = evt.target.value.trim();
+
   countryList.innerHTML = '';
   countryInfo.innerHTML = '';
+
   if (!country) {
     inputEl.removeEventListener(
       'input',
@@ -22,6 +24,7 @@ function onInputCountry(evt) {
     );
     return;
   }
+
   fetchCountries(country)
     .then(data => {
       if (data.length === 1) {
