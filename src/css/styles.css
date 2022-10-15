@@ -21,4 +21,21 @@ body {
 
 img {
   width: 30px;
+  margin-right: 5px;
+}
+
+ul {
+  padding-left: 10px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
 }
